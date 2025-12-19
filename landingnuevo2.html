@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RG Automotores | General Roca</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: '#1E88E5',     /* Azul Francia Intenso */
+                        brand: '#0D47A1',    /* Azul Oscuro */
+                        dark: '#050505',     /* Fondo */
+                        card: '#121212',     /* Tarjetas */
+                        surface: '#1E1E1E'   /* Superficies */
+                    },
+                    boxShadow: {
+                        'neon': '0 0 15px rgba(30, 136, 229, 0.4)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        // REEMPLAZA ESTA URL POR TU IMAGEN DE FONDO
+                        'hero-pattern': "linear-gradient(to bottom, rgba(5,5,5,0.5), rgba(5,5,5,1)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop')", 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn { transition: all 0.3s ease; }
+        
+        /* Estilos de botones activos/inactivos */
+        .btn-activo {
+            background-color: #1E88E5 !important;
+            color: white !important;
+            border-color: #1E88E5 !important;
+            box-shadow: 0 0 15px rgba(30, 136, 229, 0.4);
+        }
+        .btn-inactivo {
+            background-color: #1E1E1E !important;
+            color: #9CA3AF !important; /* gris */
+            border-color: #374151 !important;
+        }
+        .btn-inactivo:hover {
+            border-color: #1E88E5 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-gray-100 antialiased selection:bg-neon selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter text-white">
+                RG <span class="text-neon">AUTOMOTORES</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-bold text-gray-300">
+                <a href="#0km" class="hover:text-neon transition">0KM</a>
+                <a href="#entregas" class="hover:text-neon transition">ENTREGAS</a>
+                <a href="#contacto" class="hover:text-neon transition">PLANES</a>
+            </div>
+            <a href="#contacto" class="bg-neon text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-brand transition shadow-neon">
+                Cotizar Ahora
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative w-full h-screen bg-hero-pattern bg-cover bg-center bg-no-repeat flex items-center justify-center text-center px-4">
+        <div class="relative z-10 max-w-4xl mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-neon/20 text-neon border border-neon/50 text-xs font-bold tracking-widest mb-4 uppercase">
+                General Roca, Río Negro
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                TU PRÓXIMO AUTO <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon to-brand">ESTÁ ESPERANDO.</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light">
+                Financiación exclusiva, <strong>Plan Retiro Cuota 6</strong> y la confianza de siempre. 
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#contacto" class="bg-neon text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition transform shadow-neon">
+                    Ver Financiación
+                </a>
+                <a href="#0km" class="bg-transparent border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition">
+                    Ver Catálogo
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <section id="0km" class="py-24 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-4xl font-bold text-white mb-2">Línea <span class="text-neon">0KM</span></h2>
+                <p class="text-gray-400">Unidades de muestra.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="group relative bg-card rounded-2xl overflow-hidden border border-white/5 hover:border-neon/50 transition duration-300 shadow-lg hover:shadow-neon/30">
+                    <div class="aspect-[4/3] bg-surface relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Auto">
+                        <div class="absolute top-3 right-3 bg-neon text-white px-2 py-1 rounded text-xs font-bold">DISPONIBLE</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white">Toyota Corolla Cross</h3>
+                        <p class="text-gray-500 text-sm mb-4">Versión XEI / SEG</p>
+                        <a href="#contacto" onclick="preseleccionar('Toyota Corolla Cross')" class="block w-full text-center bg-surface hover:bg-neon hover:text-white text-white py-2 rounded font-bold transition">Consultar</a>
+                    </div>
+                </div>
+                <div class="group relative bg-card rounded-2xl overflow-hidden border border-white/5 hover:border-neon/50 transition duration-300 shadow-lg hover:shadow-neon/30">
+                    <div class="aspect-[4/3] bg-surface relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Auto">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white">Chevrolet Cruze</h3>
+                        <p class="text-gray-500 text-sm mb-4">Versión Premier</p>
+                        <a href="#contacto" onclick="preseleccionar('Chevrolet Cruze')" class="block w-full text-center bg-surface hover:bg-neon hover:text-white text-white py-2 rounded font-bold transition">Consultar</a>
+                    </div>
+                </div>
+                 <div class="group relative bg-card rounded-2xl overflow-hidden border border-white/5 hover:border-neon/50 transition duration-300 shadow-lg hover:shadow-neon/30">
+                    <div class="aspect-[4/3] bg-surface relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Auto">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white">Toyota Hilux</h3>
+                        <p class="text-gray-500 text-sm mb-4">SRX 4x4</p>
+                        <a href="#contacto" onclick="preseleccionar('Toyota Hilux')" class="block w-full text-center bg-surface hover:bg-neon hover:text-white text-white py-2 rounded font-bold transition">Consultar</a>
+                    </div>
+                </div>
+                 <div class="group relative bg-card rounded-2xl overflow-hidden border border-white/5 hover:border-neon/50 transition duration-300 shadow-lg hover:shadow-neon/30">
+                    <div class="aspect-[4/3] bg-surface relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Auto">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-white">Ford Ranger</h3>
+                        <p class="text-gray-500 text-sm mb-4">Limited</p>
+                        <a href="#contacto" onclick="preseleccionar('Ford Ranger')" class="block w-full text-center bg-surface hover:bg-neon hover:text-white text-white py-2 rounded font-bold transition">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-surface/50 border border-neon/30 p-6 rounded-xl text-center max-w-3xl mx-auto relative overflow-hidden">
+                <div class="absolute inset-0 bg-neon/5 blur-xl pointer-events-none"></div>
+                <h3 class="text-xl font-bold text-white relative z-10">
+                    <span class="text-neon mr-2">ⓘ</span> No solo trabajamos 0km
+                </h3>
+                <p class="text-gray-300 mt-2 relative z-10">
+                    Las unidades mostradas arriba son solo ejemplos. Contamos con un amplio stock de <strong>usados seleccionados</strong> y acceso a toda la línea 0km de diversas marcas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="entregas" class="py-24 bg-surface relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand/20 via-surface to-surface opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-neon font-bold tracking-widest text-sm uppercase">Clientes Reales</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">Nuestras <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon to-white">Entregas</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                
+                <div class="bg-card rounded-2xl p-1 border border-gray-800 shadow-2xl transform hover:scale-[1.02] transition">
+                    <div class="relative w-full aspect-[9/16] bg-gray-900 rounded-xl overflow-hidden group cursor-pointer" 
+                         onclick="cargarVideo(this, 'https://www.facebook.com/reel/2061394778035175/')"> 
+                        
+                        <img src="https://scontent.fmdq6-1.fna.fbcdn.net/v/t15.5256-10/600918791_2037948633650289_6396969836563488837_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=109&ccb=1-7&_nc_sid=b5ba86&_nc_eui2=AeEGxKVBqIwVvzsj9Mq_2ZYtBd9qevTWZuoF32p69NZm6got6r5IJSG7At_fSQluWIayS1GEcE9o8ijcWZw4xPdm&_nc_ohc=vWP3YEbMD7sQ7kNvwHsmwiD&_nc_oc=AdlvMQhYzPeKkL3P0GQkxhFSrHQItni39MHAUIU9zpBerKqlG9C8UjqUM--xTOCuftc&_nc_zt=23&_nc_ht=scontent.fmdq6-1.fna&_nc_gid=y2AJ-mYH4GoEgSsxwlM7Cg&oh=00_Afl_C5IpTX2cU7sANSL-jAYpyb4bLyV7PpskX3xc9675-g&oe=694A9303" alt="Entrega" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition duration-500">
+                        
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="w-20 h-20 bg-neon/90 rounded-full flex items-center justify-center shadow-neon group-hover:scale-110 transition">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-2xl p-1 border border-gray-800 shadow-2xl transform hover:scale-[1.02] transition">
+                    <div class="relative w-full aspect-[9/16] bg-gray-900 rounded-xl overflow-hidden group cursor-pointer" 
+                         onclick="cargarVideo(this, 'https://web.facebook.com/reel/833990942724239')"> 
+                        <img src="https://scontent.fmdq7-1.fna.fbcdn.net/v/t15.5256-10/602033380_1373572637899503_6500252857879563201_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b5ba86&_nc_eui2=AeH-vw5CUOQTfbBFf_7VA08lEKZLdeVvFXAQpkt15W8VcJi5vb7lRQX2lAErJ0WAIFqvdI006qwcI90f-LFMygRO&_nc_ohc=eiuu3RZsSMEQ7kNvwGm3ArZ&_nc_oc=Adm2DM1EgmYtwhS8pSCLi0NQaoNhDW02PXfBCrAGUFzBHIbbDzyah1cOkga0ZxXf_Tg&_nc_zt=23&_nc_ht=scontent.fmdq7-1.fna&_nc_gid=Q8-ueXRzyy9cFpnOVq3ASg&oh=00_Afnv2RRLBXf-nc5Wy2NfXByLXEJA6gdNZs_3Qma1oNVcFw&oe=694A9314" alt="Entrega" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="w-20 h-20 bg-neon/90 rounded-full flex items-center justify-center shadow-neon group-hover:scale-110 transition">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-2xl p-1 border border-gray-800 shadow-2xl transform hover:scale-[1.02] transition">
+                    <div class="relative w-full aspect-[9/16] bg-gray-900 rounded-xl overflow-hidden group cursor-pointer" 
+                         onclick="cargarVideo(this, 'https://web.facebook.com/reel/1486385259097216')"> 
+                        <img src="https://scontent.fmdq7-1.fna.fbcdn.net/v/t15.5256-10/597426775_4471852623047265_76918194446631932_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b5ba86&_nc_eui2=AeHRnQWP1gZPtbQF3RhTF6LG7Wtblgk_GTDta1uWCT8ZMCZhVPzlLhvg8obFDoA4mEXBaYSz6kGBxAIC_-Ont4pw&_nc_ohc=oEeGCV9wGw0Q7kNvwHfvZH6&_nc_oc=AdkqG4OwJ22NknOciB6te_JAegA2wnzEETMTRE02KkBj6R3Be_jMYT5Jv2ELu4XF0G4&_nc_zt=23&_nc_ht=scontent.fmdq7-1.fna&_nc_gid=OKgkflC6BydGOSf6Ym8i1w&oh=00_AfnYwnMcGq8wa-6RP2iTsA-cP8yk-ejKGY4Z_6Ig84uq3g&oe=694A70B7" alt="Entrega" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="w-20 h-20 bg-neon/90 rounded-full flex items-center justify-center shadow-neon group-hover:scale-110 transition">
+                                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-dark relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Personalizá tu Operación</h2>
+                <p class="text-gray-400">Elegí la opción que mejor se adapte a tu bolsillo:</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="cambiarFormulario('contado', this)" class="tab-btn btn-activo px-6 py-4 rounded-xl font-bold border cursor-pointer">
+                    💰 Contado
+                </button>
+                <button onclick="cambiarFormulario('financiacion', this)" class="tab-btn btn-inactivo px-6 py-4 rounded-xl font-bold border cursor-pointer">
+                    💳 Financiación
+                </button>
+                <button onclick="cambiarFormulario('plan_ahorro', this)" class="tab-btn btn-inactivo px-6 py-4 rounded-xl font-bold border cursor-pointer">
+                    📅 Retiro Cuota 6
+                </button>
+                <button onclick="cambiarFormulario('permuta', this)" class="tab-btn btn-inactivo px-6 py-4 rounded-xl font-bold border cursor-pointer">
+                    🚗 Entrego Usado
+                </button>
+            </div>
+
+            <div class="bg-surface border border-gray-800 rounded-3xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-neon opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div class="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-700 pb-8 lg:pb-0 pr-0 lg:pr-8">
+                        <h3 class="text-xl font-bold text-white mb-2">RG Automotores</h3>
+                        <p class="text-sm text-gray-400 mb-6">Italia 1571, General Roca.</p>
+                        <div class="space-y-5">
+                            <div class="flex items-start text-gray-300">
+                                <span class="text-neon font-bold mr-2">✓</span>
+                                <div><strong class="text-white block">Stock Físico</strong><span class="text-xs text-gray-500">Real y comprobable.</span></div>
+                            </div>
+                            <div class="flex items-start text-gray-300">
+                                <span class="text-neon font-bold mr-2">✓</span>
+                                <div><strong class="text-white block">Seguridad</strong><span class="text-xs text-gray-500">Años de trayectoria en el valle.</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <h3 id="form-titulo" class="text-2xl font-bold text-white mb-6">Consultar por Compra Contado</h3>
+                        
+                        <form id="leadForm" onsubmit="enviarFormulario(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" id="nombre" required placeholder="Tu Nombre Completo" 
+                                    class="w-full bg-dark border border-gray-700 text-white px-4 py-3 rounded-lg focus:border-neon focus:ring-1 focus:ring-neon outline-none transition placeholder-gray-600">
+                                <input type="tel" id="telefono" required placeholder="WhatsApp (Ej: 2984...)" 
+                                    class="w-full bg-dark border border-gray-700 text-white px-4 py-3 rounded-lg focus:border-neon focus:ring-1 focus:ring-neon outline-none transition placeholder-gray-600">
+                            </div>
+
+                            <div id="campos-dinamicos" class="bg-black/30 p-5 rounded-lg border border-white/5 space-y-4">
+                                </div>
+
+                            <input type="hidden" id="tipo_operacion" value="contado">
+
+                            <button type="submit" id="btn-submit" class="w-full bg-neon text-white font-black text-lg py-4 rounded-lg hover:bg-brand hover:shadow-neon transition-all transform active:scale-[0.99] mt-2">
+                                ENVIAR CONSULTA
+                            </button>
+                        </form>
+                        
+                        <div id="mensaje-exito" class="hidden text-center py-10 bg-black/30 rounded-xl border border-neon/20">
+                            <h3 class="text-2xl font-bold text-white mb-2">¡Recibido!</h3>
+                            <p class="text-gray-400">Te contactaremos a la brevedad.</p>
+                            <button onclick="location.reload()" class="mt-4 text-neon underline">Nueva consulta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-gray-800 py-10 text-center text-gray-500 text-sm">
+        <p>RG AUTOMOTORES © 2025</p>
+    </footer>
+
+    <script>
+        // 1. SUPABASE (REEMPLAZA ESTO CON TUS DATOS)
+        const supabaseUrl = 'https://ddsadclkyietfwqrwglq.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkc2FkY2xreWlldGZ3cXJ3Z2xxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYxMDc3MDUsImV4cCI6MjA4MTY4MzcwNX0.KoQ_UCgLSVPymjzWK6AsZoLT6XMCXFYeg1mrWEo7OcA';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. FORMULARIOS HTML
+        const formsHTML = {
+            contado: `
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Vehículo de interés</label>
+                <input type="text" id="interes" placeholder="Ej: Toyota Corolla" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block mt-3">Presupuesto</label>
+                <select id="presupuesto" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                    <option value="1-3m">1 a 3 millones</option>
+                    <option value="5-10m">5 a 10 Millones</option>
+                    <option value="10-15m">10 a 15 Millones</option>
+                    <option value="+15m">Más de 15 Millones</option>
+                </select>
+            `,
+            financiacion: `
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Vehículo de interés</label>
+                <input type="text" id="interes" placeholder="Marca / Modelo" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Ingresos</label>
+                        <input type="text" id="ingresos" placeholder="$ Mensual" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Anticipo</label>
+                        <input type="text" id="anticipo" placeholder="$ Disponible" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                    </div>
+                </div>
+            `,
+            permuta: `
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Tu Auto Actual</label>
+                <input type="text" id="auto_actual" placeholder="Marca, Modelo, Versión" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                    <div>
+                        <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Año</label>
+                        <input type="number" id="anio_actual" placeholder="Ej: 2018" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Kms</label>
+                        <input type="text" id="km_actual" placeholder="Ej: 80.000" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                    </div>
+                </div>
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block mt-3">Busco a cambio:</label>
+                <input type="text" id="interes" placeholder="Marca / Modelo" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+            `,
+            plan_ahorro: `
+                <div class="bg-blue-900/20 border border-blue-500/20 p-3 rounded mb-4 flex items-center">
+                    <span class="text-2xl mr-3">📅</span>
+                    <p class="text-xs text-blue-200 leading-tight">Retira tu 0km adjudicado en la <strong>cuota número 6</strong>.</p>
+                </div>
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block">Modelo 0km</label>
+                <input type="text" id="interes" placeholder="Ej: Fiat Cronos..." class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+                <label class="text-xs text-neon font-bold uppercase tracking-wider mb-1 block mt-3">Cuota Mensual Posible</label>
+                <input type="text" id="capacidad_pago" placeholder="$ Disponible por mes" class="w-full bg-dark border border-gray-600 text-white px-4 py-3 rounded focus:border-neon outline-none">
+            `
+        };
+
+        // 3. FUNCIÓN SWITCH DE PESTAÑAS (CORREGIDA)
+        function cambiarFormulario(tipo, btnClickeado) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('btn-activo');
+                btn.classList.add('btn-inactivo');
+            });
+            if(btnClickeado) {
+                btnClickeado.classList.remove('btn-inactivo');
+                btnClickeado.classList.add('btn-activo');
+            }
+            const container = document.getElementById('campos-dinamicos');
+            container.innerHTML = formsHTML[tipo];
+            document.getElementById('tipo_operacion').value = tipo;
+            const titulos = {
+                contado: "Compra al Contado",
+                financiacion: "Solicitud de Financiación",
+                permuta: "Cotizar Usado",
+                plan_ahorro: "Plan Retiro Cuota 6"
+            };
+            document.getElementById('form-titulo').innerText = titulos[tipo];
+        }
+
+        function preseleccionar(auto) {
+            document.getElementById('contacto').scrollIntoView();
+            const botones = document.querySelectorAll('.tab-btn');
+            cambiarFormulario('contado', botones[0]);
+            setTimeout(() => {
+                const input = document.getElementById('interes');
+                if(input) input.value = auto;
+            }, 100);
+        }
+
+        // 4. ENVÍO DATOS
+        async function enviarFormulario(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            const originalText = btn.innerText;
+            btn.disabled = true; 
+            btn.innerText = "ENVIANDO...";
+            
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                telefono: document.getElementById('telefono').value,
+                tipo_operacion: document.getElementById('tipo_operacion').value,
+                datos_interes: {}
+            };
+
+            document.getElementById('campos-dinamicos').querySelectorAll('input, select').forEach(i => {
+                if(i.id) datos.datos_interes[i.id] = i.value;
+            });
+
+            try {
+                const { error } = await _supabase.from('consultas_web').insert([datos]);
+                if(error) throw error;
+                document.getElementById('leadForm').classList.add('hidden');
+                document.getElementById('mensaje-exito').classList.remove('hidden');
+            } catch(err) {
+                alert('Error al enviar. Intente por WhatsApp.');
+                console.error(err);
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
+        }
+
+        // 5. CARGAR VIDEO (AJUSTADO PARA REELS)
+        function cargarVideo(el, url) {
+            // Encodeamos la URL para que no rompa el parametro de FB
+            const encoded = encodeURIComponent(url);
+            el.innerHTML = `<iframe src="https://www.facebook.com/plugins/video.php?href=${encoded}&show_text=false&autoplay=1" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay"></iframe>`;
+            el.removeAttribute('onclick');
+            el.classList.remove('cursor-pointer');
+        }
+
+        // INICIALIZAR
+        document.addEventListener('DOMContentLoaded', () => {
+            const botones = document.querySelectorAll('.tab-btn');
+            if(botones.length > 0) cambiarFormulario('contado', botones[0]);
+        });
+    </script>
+</body>
+</html>
